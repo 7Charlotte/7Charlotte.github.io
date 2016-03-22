@@ -82,16 +82,11 @@ function getData() {
  * 返回一个排序后的数组
  */
 function sortAqiData(data) {
-  var temp = 0;
-  for (var i = 0; i < data.length; i++){
-    for (var j = 0; j < data.length - i; j++){
-      if (data[j][1] > data[j + 1][1]){
-        temp = data[j + 1][1];
-        data[j + 1][1] = data[j][1];
-        data[j][1] = temp;
-      }
+  data = data.sort(
+    function(a,b){
+      return parseInt(a[1])>parseInt(b[1]);
     }
-  }
+  )
   console.log(data);
   return data;
 }

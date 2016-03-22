@@ -35,7 +35,7 @@
  * 返回一个数组，格式见函数中示例
  */
 // var a = new Array();
-
+// trials
 //   var cityInfo, cityName, cityAqi;
 //   var sourceList = document.querySelectorAll("#source li");
 //   var data = new Array();
@@ -101,20 +101,20 @@ function render(data) {
   for (var i = 0; i < data.length; i++) {
     var orderedList = document.createElement("li");
     var aqiList = document.createElement("b");
-    var cityText =document.createTextNode( "第" + order[i] + "名" + data[i][0] + "空气质量：");
+    var cityText =document.createTextNode( "第" + order[i] + "名:" + data[i][0] + "空气质量：");
     var aqiText = document.createTextNode(data[i][1]);
     var resortedData = document.getElementById("resort");
 
     aqiList.appendChild(aqiText);
-    orderedList.appendChild(cityText);
-    orderedList.appendChild(aqiList);
+    orderedList.appendChild(cityText);//第一个元素
+    orderedList.appendChild(aqiList);//第二个元素
+
     resortedData.appendChild(orderedList);
   }
 
 }
 
 function btnHandle() {
-  console.log("btnHandle done");
   var aqiData = getData();
   aqiData = sortAqiData(aqiData);
   render(aqiData);

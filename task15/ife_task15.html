@@ -62,8 +62,8 @@ function getData() {
         cityInfo = sourceList.item(i).innerText;
         cityName = cityInfo.substr(0,2);
         cityAqi = cityInfo.substr(7,2);/*http://blog.minidx.com/2008/01/07/355.html substring 的用法*/
-        var a = new Array(cityName, cityAqi);//将城市名和指数组成一个数组，再推送到另一个新数组里面成为一个二维数组
-        data.push(a);
+        //将城市名和指数组成一个数组，再推送到另一个新数组里面成为一个二维数组
+        data.push(new Array(cityName, cityAqi));
         console.log(data); 
   }
   /*
@@ -73,7 +73,6 @@ function getData() {
     ……
   ]
   */
-  console.log(data);
   return data;
 }
 
@@ -86,10 +85,10 @@ function sortAqiData(data) {
   var temp = 0;
   for (var i = 0; i < data.length; i++){
     for (var j = 0; j < data.length - i; j++){
-      if (data[i][j] > data[i][j + 1]){
-        temp = data[i][j + 1];
-        data[i][j + 1] = data[i][j];
-        data[i][j] = temp;
+      if (data[j][1] > data[j + 1][1]){
+        temp = data[j + 1][1];
+        data[j + 1][1] = data[j][1];
+        data[j][1] = temp;
       }
     }
   }

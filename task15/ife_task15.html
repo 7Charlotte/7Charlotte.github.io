@@ -81,14 +81,29 @@ function getData() {
  * 按空气质量对data进行从小到大的排序
  * 返回一个排序后的数组
  */
+// sort方法
+// function sortAqiData(data) {
+//   data = data.sort(
+//     function(a,b){
+//       return parseInt(a[1])>parseInt(b[1]);
+//     }
+//   )
+//   console.log(data);
+//   return data;
+// }
+
+//冒泡排序方法
 function sortAqiData(data) {
-  data = data.sort(
-    function(a,b){
-      return parseInt(a[1])>parseInt(b[1]);
+  for(var i=0;i<data.length;i++){
+    for(var j=0;j<i;j++){
+      if(parseInt(data[i][1]) < parseInt(data[j][1])){
+        tmp=data[i][1]
+        data[i][1]=data[j][1]
+        data[j][1]=tmp
+      }
     }
-  )
-  console.log(data);
-  return data;
+  }
+  return data
 }
 
 /**

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>IFE JavaScript Task 01</title>
+    <title>IFE JavaScript Task 15</title>
   </head>
 <body>
 
@@ -34,21 +34,20 @@
  * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
  * 返回一个数组，格式见函数中示例
  */
-var a = new Array();
-a =['w',2];
-document.writeln(a);
+// var a = new Array();
 
-  var cityInfo, cityName, cityAqi;
-  var sourceList = document.querySelectorAll("#source li");
-  var data = new Array();
-  console.log(sourceList);
-  for(var i in sourceList){
-        cityInfo = sourceList.item(i).innerText;
-        cityName = cityInfo.substring(0,2);
-        cityAqi = cityInfo.substring(7);/*http://blog.minidx.com/2008/01/07/355.html substring 的用法*/
-        // console.log(cityAqi);
-        data.push( new Array(cityName, cityAqi) );
-  }
+//   var cityInfo, cityName, cityAqi;
+//   var sourceList = document.querySelectorAll("#source li");
+//   var data = new Array();
+//   console.log(sourceList);
+//   for(var i = 0 ; i < sourceList.length; i++){
+//         cityInfo = sourceList.item(i).innerText;
+//         cityName = cityInfo.substring(0,2);
+//         cityAqi = cityInfo.substring(7);/*http://blog.minidx.com/2008/01/07/355.html substring 的用法*/
+//         // console.log(cityAqi);
+//         data.push( new Array(cityName, cityAqi) );
+//   }
+//   console.log(data);
 
 
 function getData() {
@@ -58,16 +57,15 @@ function getData() {
   var cityInfo, cityName, cityAqi;
   var sourceList = document.querySelectorAll("#source li");
   var data = new Array();
-  console.log(sourceList);
-  for(var i in sourceList){
+  // console.log(sourceList);
+  for(var i = 0 ; i < sourceList.length; i++){
         cityInfo = sourceList.item(i).innerText;
-        cityName = cityInfo.substring(0,2);
-        cityAqi = cityInfo.substring(6);/*http://blog.minidx.com/2008/01/07/355.html substring 的用法*/
-        // console.log(cityAqi);
-        data.push( new Array(cityName, cityAqi) );//将城市名和指数组成一个数组，再推送到另一个新数组里面成为一个二维数组
+        cityName = cityInfo.substr(0,2);
+        cityAqi = cityInfo.substr(7,2);/*http://blog.minidx.com/2008/01/07/355.html substring 的用法*/
+        var a = new Array(cityName, cityAqi);//将城市名和指数组成一个数组，再推送到另一个新数组里面成为一个二维数组
+        data.push(a);
+        console.log(data); 
   }
-
-
   /*
   data = [
     ["北京", 90],
@@ -75,18 +73,28 @@ function getData() {
     ……
   ]
   */
-
+  console.log(data);
   return data;
-
 }
 
-/**
+/*
  * sortAqiData
  * 按空气质量对data进行从小到大的排序
  * 返回一个排序后的数组
  */
 function sortAqiData(data) {
-
+  var temp = 0;
+  for (var i = 0; i < data.length; i++){
+    for (var j = 0; j < data.length - i; j++){
+      if (data[i][j] > data[i][j + 1]){
+        temp = data[i][j + 1];
+        data[i][j + 1] = data[i][j];
+        data[i][j] = temp;
+      }
+    }
+  }
+  console.log(data);
+  return data;
 }
 
 /**
@@ -95,10 +103,24 @@ function sortAqiData(data) {
  * 格式见ul中的注释的部分
  */
 function render(data) {
+  var order = ['一','二','三','四','五','六','七'];
+  for (var i = 0; i < data.length; i++) {
+    var orderedList = document.createElement("li");
+    var aqiList = document.createElement("b");
+    var cityText =document.createTextNode( "第" + order[i] + "名" + data[i][0] + "空气质量：");
+    var aqiText = document.createTextNode(data[i][1]);
+    var resortedData = document.getElementById("resort");
+
+    aqiList.appendChild(aqiText);
+    orderedList.appendChild(cityText);
+    orderedList.appendChild(aqiList);
+    resortedData.appendChild(orderedList);
+  }
 
 }
 
 function btnHandle() {
+  console.log("btnHandle done");
   var aqiData = getData();
   aqiData = sortAqiData(aqiData);
   render(aqiData);
@@ -106,9 +128,11 @@ function btnHandle() {
 
 
 function init() {
-
   // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
-
+  var sortBtn = document.getElementById("sort-btn");
+  if(sortBtn != null){
+    sortBtn.addEventListener("click", btnHandle, false);  
+  }
 }
 
 init();

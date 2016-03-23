@@ -16,9 +16,9 @@ var aqiValue = document.getElementById("aqi-value-input").value;
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-	if (aqiCity.match(/[\u4e00-\u9fa5]/g)){
+	if (/^[\u4E00-\u9FA5]+$/.test("aqiCity")){
 		console.log("hi");
-		return true
+		return true;
 	} else {
 		aqiCity = "";
 		alert("请输入中文");

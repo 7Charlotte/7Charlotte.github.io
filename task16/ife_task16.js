@@ -15,7 +15,7 @@ var aqiData = {}
 function addAqiData() {
 	var aqiCity = document.querySelector("#aqi-city-input").value;
 	var aqiValue = document.querySelector("#aqi-value-input").value;
-	if ((/^[\u4E00-\u9FA5_a-zA-Z]+$/.test(aqiCity) || /^[0-9]+$/.test(aqiValue)) != true){
+	if ((/^[\u4E00-\u9FA5_a-zA-Z]+$/.test(aqiCity) && /^[0-9]+$/.test(aqiValue)) != true){
 			aqiCity = "";	
 			aqiValue = "";
 		}

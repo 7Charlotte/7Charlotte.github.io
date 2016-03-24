@@ -6,23 +6,23 @@
  *    "上海": 40
  * };
  */
-var aqiData = {};
-
-var aqiCity = document.getElementById("aqi-city-input").value;
-var aqiValue = document.getElementById("aqi-value-input").value;
+var aqiData = {}
 
 /**
  * 从用户输入中获取数据，向aqiData中增加一条数据
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-	if (/^[\u4E00-\u9FA5]+$/.test(aqiCity)){
-		return true;
-	} else {
-		aqiCity = "";
-		alert("请输入中文");
-		console.log("opus");
-	}
+	var aqiCity = document.querySelector("#aqi-city-input").value;
+	var aqiValue = document.querySelector("#aqi-value-input").value;
+	if ((/^[\u4E00-\u9FA5_a-zA-Z]+$/.test(aqiCity) || /^[0-9]+$/.test(aqiValue)) != true){
+			aqiCity = "";	
+			aqiValue = "";
+		}
+
+	console.log(aqiCity);                 
+	console.log(aqiValue);
+	
 }
 
 /**

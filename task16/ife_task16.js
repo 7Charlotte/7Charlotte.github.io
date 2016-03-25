@@ -19,11 +19,16 @@ function addAqiData() {
 			aqiCity = "";	
 			aqiValue = "";
 		}
-
-	console.log(aqiCity);                 
+	console.log(aqiCity);
 	console.log(aqiValue);
+	aqiData.prototype.aqiCity = aqiValue;
+	console.log(aqiData);
 	
 }
+
+
+
+
 
 /**
  * 渲染aqi-table表格

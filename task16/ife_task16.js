@@ -19,9 +19,7 @@ function addAqiData() {
 			aqiCity = "";	
 			aqiValue = "";
 		}
-	console.log(aqiCity);
-	console.log(aqiValue);
-	aqiData.prototype.aqiCity = aqiValue;
+	aqiData.aqiCity = aqiValue;
 	console.log(aqiData);
 	
 }

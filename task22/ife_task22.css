@@ -1,0 +1,5 @@
+div{border: 1px solid #333;padding: 10px; background-color: #ffffff; }
+.hierarchy1{ display:-webkit-flex; display: flex;}
+.hierarchy2{display: -webkit-flex; flex: 1;}
+.hierarchy3{display: -webkit-flex; flex: 1;}
+.hierarchy4{display: -webkit-flex; flex: 1;}

@@ -15,12 +15,11 @@ function traserval(node) {
         traserval(node.lastElementChild);
     }
 }
-console.log(Date.now());
 traserval(root);
-console.log(Date.now());
+
 
 var i = 0;
-result[i].style.backgroundColor = 'blue';
+result[i].style.backgroundColor = 'red';
 timer = setInterval(function(){
     i++;
     if(i < result.length){

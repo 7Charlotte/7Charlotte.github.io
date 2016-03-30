@@ -1,3 +1,4 @@
+
 var numberList = new Array();
 
 //验证数字
@@ -18,15 +19,25 @@ function renderList() {
     for (var i = 0; i < numberList.length; i++) {
         var numberItem = document.createElement("li");
         numberItem.innerText = numberList[i];
+        numberItem.setAttribute("id",i);//一个trick的方法,给每个list添加一个id,以此来获取哪个list被点击了
         outputNumber.appendChild(numberItem);
-        if (numberItem) {
-            numberItem.addEventListener("click", function(){
-                this.parentNode.removeChild(this);
-                alert(this.innerText);
-                numberList.splice(i,1);
-            }, false);
-        }
     }
+    bindListener();
+}
+
+function bindListener() {
+    var outputList = document.querySelectorAll("#number-output li");
+    for (var i = 0; i < outputList.length; i++) {
+        outputList[i].addEventListener("click", delListHandle, false);
+    }
+}
+
+function delListHandle(e){//回调函数接受事件参数,用e.target定位发生事件的节点
+    e.target.parentNode.removeChild(e.target);
+    alert(this.innerText);
+    var index = this.getAttribute("id");//获取哪个list被点击了
+    numberList.splice(index, 1);
+    renderList();
 }
 
 function leftInHandle() {
@@ -55,12 +66,6 @@ function rightOutHandle() {
     alert(item);
 }
 
-function delItemHandle(i) {
-    delete numberList[i];
-    console.log(numberList);
-
-}
-
 function init() {
     var leftInBtn = document.getElementById("left-in");
     var rightInBtn = document.getElementById("right-in");
@@ -73,10 +78,10 @@ function init() {
     if (rightInBtn) {
         rightInBtn.addEventListener("click", rightInHandle, false);
     }
-    if (leftOutBtn) {
+    if (leftOutBtn && numberList.length !== 0) {
         leftOutBtn.addEventListener("click", leftOutHandle, false);
     }
-    if (rightOutBtn) {
+    if (rightOutBtn && numberList.length !== 0) {
         rightOutBtn.addEventListener("click", rightOutHandle, false);
     }
 }

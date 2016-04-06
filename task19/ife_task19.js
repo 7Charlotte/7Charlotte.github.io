@@ -1,4 +1,3 @@
-
 var numberList = new Array();
 
 //验证数字
@@ -7,10 +6,12 @@ function checkNumber() {
     if (/^[0-9]+$/.test(inputNumber) != true) {
         alert("请输入数字");
         return;
+    } else if (inputNumber < 10 || inputNumber > 100) {
+        alert("请输入10-100之间的数字");
+        return;
     } else {
         return parseInt(inputNumber);
     }
-
 }
 
 function renderList() {
@@ -18,10 +19,11 @@ function renderList() {
     outputNumber.innerHTML = "";
     for (var i = 0; i < numberList.length; i++) {
         var numberItem = document.createElement("li");
-        numberItem.innerText = numberList[i];
-        numberItem.setAttribute("id",i);//一个trick的方法,给每个list添加一个id,以此来获取哪个list被点击了
+        numberItem.style.height = 2 * numberList[i] + "px";
+        numberItem.setAttribute("id", i);//一个trick的方法,给每个list添加一个id,以此来获取哪个list被点击了
         outputNumber.appendChild(numberItem);
     }
+
     bindListener();
 }
 
@@ -32,7 +34,7 @@ function bindListener() {
     }
 }
 
-function delListHandle(e){//回调函数接受事件参数,用e.target定位发生事件的节点
+function delListHandle(e) {//回调函数接受事件参数,用e.target定位发生事件的节点
     e.target.parentNode.removeChild(e.target);
     alert(this.innerText);
     var index = this.getAttribute("id");//获取哪个list被点击了
@@ -42,18 +44,18 @@ function delListHandle(e){//回调函数接受事件参数,用e.target定位发�
 
 function leftInHandle() {
     var num = checkNumber();
-    if (num !== null) {
+    if (num !== undefined || numberList.length <= 60) {
         numberList.unshift(num);
     }
+    //select_sort(numberList);
     renderList();
-    select_sort(numberList);
-    console.log(numberList);
+
 }
 
 function rightInHandle() {
     var num = checkNumber();
-    if (num !== null) {
-        numberList.unshift(num);
+    if (num !== undefined || numberList.length <= 60) {
+        numberList.push(num);
     }
     renderList();
 }
@@ -61,13 +63,17 @@ function rightInHandle() {
 function leftOutHandle() {
     var item = numberList.shift();
     renderList();
-    alert(item);
 }
 
 function rightOutHandle() {
     var item = numberList.pop();
     renderList();
-    alert(item);
+s
+}
+
+function sortHandle() {
+    select_sort(numberList);
+    renderList();
 }
 
 function init() {
@@ -75,6 +81,7 @@ function init() {
     var rightInBtn = document.getElementById("right-in");
     var leftOutBtn = document.getElementById("left-out");
     var rightOutBtn = document.getElementById("right-out");
+    var sortBtn = document.getElementById("sort");
 
     if (leftInBtn) {
         leftInBtn.addEventListener("click", leftInHandle, false);
@@ -88,12 +95,16 @@ function init() {
     if (rightOutBtn && numberList.length !== 0) {
         rightOutBtn.addEventListener("click", rightOutHandle, false);
     }
+    if (sortBtn) {
+        sortBtn.addEventListener("click", sortHandle, false);
+    }
 }
+
 function select_sort(numberList) {
-    for(var i = 0; i < numberList.length; i++){
+    for (var i = 0; i < numberList.length; i++) {
         var min = i;
-        for(var j = i+1; j < numberList.length; j++){
-            if(numberList[j] < numberList[min]){
+        for (var j = i + 1; j < numberList.length; j++) {
+            if (numberList[j] < numberList[min]) {
                 min = j;
             }
         }

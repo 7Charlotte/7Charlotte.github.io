@@ -4,7 +4,7 @@ var boxList = new Array();//记录切分后的对象数组
 //验证数字
 function checkNumber() {
     var inputNumber = document.getElementById("number-input").value;
-    var inputArr = inputNumber.split(/[\s\r\u3000\t\.,,:;、\/!@#\$%\^&\*\(\)\\]/);
+    var inputArr = inputNumber.split(/[\s\r\u3000\t\.,,:;、。，\/!@#\$%\^&\*\(\)\\]/);
     for (var i = 0; i < inputArr.length; i++) {
         var temp = inputArr[i].trim();
         if(temp.length != 0) {

@@ -27,35 +27,53 @@ ctx.fill();
 function Ship(id, status) {
     this.id = id;
     this.status = status;
+    this.velocity = 20;
     this.energy = 100;
-    this.motivationSystem = function () {
-        if (status = "start" && this.energy <= 100) {
+ 
+    this.fly = function () {
+       
+        if (this.status = "start" && this.energy <= 100) {
             this.energy += 5;
             console.log("增加能源");
         }
-    };
-    this.energySystem = function () {
         if (this.energy >= 0) {
             this.energy -= 2;
             console.log("减少能源");
-        }else {
-            this.status = stop;
+        } else {
+            this.velocity = 0;
+            console.log("飞船停止");
+            this.statu = "stop";
         }
     };
+
     this.selfDestroy = function () {
-        if (status = "destroy" ) {
+        if (this.status = "destroy" ) {
             console.log("自爆");
         }
     };
+
+    this.receiveSign = function(){
+        console.log("接受信号");
+    }
+
+
 }
 
-var commander = {
-    id: 1,
-    command: "stop"
+function Commander(id,command){
+    this.id = id;
+    this.command = command;
 }
 
-var newtime = 0;
-var ship = new Ship(1, "start");
-while (newtime) {
-    ship.motivationSystem();
+
+var medicator = {
+
+};
+
+function init(){
+    var newtime = 0;
+    var ship = new Ship(1, "start");
+    while (newtime) {
+        ship.fly();
+    }
 }
+init();

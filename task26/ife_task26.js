@@ -59,13 +59,13 @@ function Ship(id, status) {
 
 }
 
-function Commander(id,command){
+function Command(id,command){
     this.id = id;
     this.command = command;
 }
 
 
-var medicator = {
+var mediator = {
 
 };
 

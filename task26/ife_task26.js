@@ -7,7 +7,7 @@ ctx.fill();
 
 //
 //var ship = {
-//    status: 'stop',
+//    command: 'stop',
 //    veloctiy: '20',
 //    energy: 100,
 //    motivationSystem: function () {
@@ -23,16 +23,20 @@ ctx.fill();
 //    }
 //
 //};
+var mediator = new Mediator();
 
-function Ship(id, status) {
+function Ship(id, command) {
+    console.log("新建飞船");
     this.id = id;
-    this.status = status;
+    this.command = command;
     this.velocity = 20;
     this.energy = 100;
  
-    this.fly = function () {
+    this.fly = function (id,command) {
+        console.log("飞船环形飞行");
+        //TODO
        
-        if (this.status = "start" && this.energy <= 100) {
+        if (this.command = "start" && this.energy <= 100) {
             this.energy += 5;
             console.log("增加能源");
         }
@@ -47,13 +51,14 @@ function Ship(id, status) {
     };
 
     this.selfDestroy = function () {
-        if (this.status = "destroy" ) {
+        if (this.command = "destroy" ) {
             console.log("自爆");
         }
     };
 
-    this.receiveSign = function(){
+    this.receiveSign = function(id,command){
         console.log("接受信号");
+        this.fly()
     }
 
 
@@ -65,15 +70,36 @@ function Command(id,command){
 }
 
 
-var mediator = {
+function Commander(id ,command){
+    console.log("指挥官发信号");
+    this.command = new Command(id,command);
+    mediator.broadcast(this.command);
 
-};
+}
+
+
+function Mediator(){
+    this.observer = [];
+    this.register = function(ship){
+        this.observer.push(ship);
+        console.log("注册飞船");
+    }
+    this.broadcast = function (command) {
+        for(var i in this.observer){
+            this.observer[i].receiveSign(command);
+        }
+    }
+}
 
 function init(){
     var newtime = 0;
     var ship = new Ship(1, "start");
+    mediator.register(ship);
     while (newtime) {
         ship.fly();
     }
+    setTimeout(function(){
+        var commander = new Commander(1,"stop");
+    },3000)
 }
 init();

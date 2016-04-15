@@ -24,6 +24,7 @@ ctx.fill();
 //
 //};
 var mediator = new Mediator();
+var observer = new Array();
 
 function Ship(id, command) {
     console.log("新建飞船");
@@ -31,11 +32,11 @@ function Ship(id, command) {
     this.command = command;
     this.velocity = 20;
     this.energy = 100;
- 
-    this.fly = function (id,command) {
+
+    this.fly = function (id, command) {
         console.log("飞船环形飞行");
         //TODO
-       
+
         if (this.command = "start" && this.energy <= 100) {
             this.energy += 5;
             console.log("增加能源");
@@ -51,55 +52,54 @@ function Ship(id, command) {
     };
 
     this.selfDestroy = function () {
-        if (this.command = "destroy" ) {
+        if (this.command = "destroy") {
             console.log("自爆");
         }
     };
 
-    this.receiveSign = function(id,command){
+    this.receiveSign = function (id, command) {
         console.log("接受信号");
         this.fly()
     }
 
-
+    this.register = function () {
+        observer.push(this);
+        console.log("注册飞船");
+    }
 }
 
-function Command(id,command){
+function Command(id, command) {
     this.id = id;
     this.command = command;
 }
 
 
-function Commander(id ,command){
+function Commander(id, command) {
     console.log("指挥官发信号");
-    this.command = new Command(id,command);
+    this.command = new Command(id, command);
     mediator.broadcast(this.command);
 
 }
 
 
-function Mediator(){
-    this.observer = [];
-    this.register = function(ship){
-        this.observer.push(ship);
-        console.log("注册飞船");
-    }
+function Mediator() {
     this.broadcast = function (command) {
-        for(var i in this.observer){
-            this.observer[i].receiveSign(command);
+        console.log("广播信号");
+        for (var i in observer) {
+            observer[i].receiveSign(command);
         }
     }
 }
 
-function init(){
-    var newtime = 0;
+function init() {
     var ship = new Ship(1, "start");
-    mediator.register(ship);
-    while (newtime) {
+    ship.register();
+    while (true) {
         ship.fly();
     }
-    setTimeout(function(){
-        var commander = new Commander(1,"stop");
-    },3000)
+    setTimeout(function () {
+        var commander = new Commander(1, "stop");
+    }, 3000)
 }
+
 init();

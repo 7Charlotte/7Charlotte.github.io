@@ -25,6 +25,8 @@ ctx.fill();
 //};
 var mediator = new Mediator();
 var observer = new Array();
+var commander = new Commander();
+var commandEnum = ["start", "stop", "destroy"];
 
 function Ship(id, command) {
     console.log("新建飞船");
@@ -39,11 +41,11 @@ function Ship(id, command) {
 
         if (this.command = "start" && this.energy <= 100) {
             this.energy += 5;
-            console.log("增加能源");
+            //console.log("增加能源");
         }
         if (this.energy >= 0) {
             this.energy -= 2;
-            console.log("减少能源");
+            //console.log("减少能源");
         } else {
             this.velocity = 0;
             console.log("飞船停止");
@@ -57,8 +59,8 @@ function Ship(id, command) {
         }
     };
 
-    this.receiveSign = function (id, command) {
-        console.log("接受信号");
+    this.receiveSign = function (command) {
+        console.log("接受信号" + command.id + "," + command.command);
         this.fly()
     }
 
@@ -74,32 +76,44 @@ function Command(id, command) {
 }
 
 
-function Commander(id, command) {
-    console.log("指挥官发信号");
-    this.command = new Command(id, command);
-    mediator.broadcast(this.command);
+function Commander() {
+    this.sendMes = function () {
+        var shipId = Math.floor(Math.random() * 4);
+        var commandId = Math.floor(Math.random() * 3);
+        if (shipId == 4) {
+            shipId--;
+        }
+        if (commandId == 3) {
+            commandId--;
+        }
+        var command = new Command(shipId, commandEnum[commandId])
+        mediator.broadcast(command);
+        console.log("指挥官发信号" + command.id + "," + command.command);
+    }
+
 
 }
 
 
 function Mediator() {
     this.broadcast = function (command) {
-        console.log("广播信号");
         for (var i in observer) {
             observer[i].receiveSign(command);
+
         }
+        console.log("广播信号");
     }
 }
 
 function init() {
     var ship = new Ship(1, "start");
     ship.register();
-    while (true) {
-        ship.fly();
-    }
     setTimeout(function () {
-        var commander = new Commander(1, "stop");
-    }, 3000)
+        commander.sendMes();
+    }, 3000);
+    setInterval(function () {
+        ship.fly();
+    }, 1000)
 }
 
 init();

@@ -2,7 +2,6 @@
  * Created by liuxia on 16/4/23.
  */
  function Layer(ele,maskEle){
-
 	this.ele = ele;
 	this.maskEle = maskEle;
 
@@ -24,11 +23,10 @@
 	},
 
 	scrollHandler: function(){
-		
+		console.log("scroll layer");
 	    if (this.ele.style.display == "block") {
 	    	this.ele.style.top = (document.documentElement.clientHeight - this.ele.offsetHeight ) / 2 + document.documentElement.scrollTop + "px";
-	    }
-		
+	    }	
 	}
 }
 
@@ -49,7 +47,7 @@ mask.addEventListener("click", function(){
 
 for (var i = 0; i < dialogBtn.length; ++i ) {
     dialogBtn[i].addEventListener("click", function(){
-    	layer.hideHandler();
+    	layer.hide();
     }, false);
 }
 

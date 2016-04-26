@@ -1,6 +1,37 @@
 /**
  * Created by liuxia on 16/4/23.
  */
+ function Layer(ele,maskEle){
+
+	this.ele = ele;
+	this.maskEle = maskEle;
+
+}
+ Layer.prototype = {
+	show: function(){
+		console.log("show layer");
+		this.maskEle.style.display = "block";
+	    this.ele.style.display = "block";
+	    this.ele.style.top = (document.documentElement.clientHeight - this.ele.offsetHeight) / 2 + "px";
+	    this.ele.style.left = (document.documentElement.clientWidth - this.ele.offsetWidth) / 2 + "px";
+
+	},
+
+	hide: function(){
+		console.log("hide layer");
+		this.maskEle.style.display = "none";
+   		this.ele.style.display = "none";
+	},
+
+	scrollHandler: function(){
+		
+	    if (this.ele.style.display == "block") {
+	    	this.ele.style.top = (document.documentElement.clientHeight - this.ele.offsetHeight ) / 2 + document.documentElement.scrollTop + "px";
+	    }
+		
+	}
+}
+
 var dialogBox = document.getElementById("dialog-box");
 var trigBtn = document.getElementById("trig-btn");
 var mask = document.querySelector("#mask");
@@ -9,52 +40,23 @@ var dialogBtn = document.querySelectorAll("#dialog-box button");
 var layer = new Layer(dialogBox ,mask);
 
 trigBtn.addEventListener("click", function(){
-	layer.showHandler();
+	layer.show();
 }, false);
 
 mask.addEventListener("click", function(){
-	layer.hideHandler();
+	layer.hide();
 }, false);
 
-for (var i = 0; i < dialogBtn.length; ++i) {
+for (var i = 0; i < dialogBtn.length; ++i ) {
     dialogBtn[i].addEventListener("click", function(){
     	layer.hideHandler();
     }, false);
 }
 
+window.onscroll = layer.scrollHandler;
 
-function Layer(ele,maskEle){
 
-	this.ele = ele;
-	this.maskEle = maskEle;
 
-}
-
-Layer.prototype = {
-	showHandler: function(){
-		console.log("show layer");
-		maskEle.style.display = "block";
-	    ele.style.display = "block";
-	    ele.style.top = (document.documentElement.clientHeight - ele.offsetHeight) / 2 + "px";
-	    ele.style.left = (document.documentElement.clientWidth - ele.offsetWidth) / 2 + "px";
-
-	},
-
-	hideHandler: function(){
-		console.log("hide layer");
-		maskEle.style.display = "none";
-   		ele.style.display = "none";
-	},
-
-	scrollHandler: function(){
-		window.onscroll = function () {
-    	// 当页面的滚动条滚动时,会执行这里的代码
-		    if (ele.display == "block") {
-		    	ele.style.top = (document.documentElement.clientHeight - ele.offsetHeight ) / 2 + document.documentElement.scrollTop + "px";
-		    }
-		}
-	}
-}
 
 
 

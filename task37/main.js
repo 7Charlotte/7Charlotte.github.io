@@ -1,8 +1,10 @@
 (function () {
-    var dialogBox = document.getElementById("dialog-box");
-    var trigBtn = document.getElementById("trig-btn");
-    var mask = document.querySelector("#mask");
-    var dialogBtn = document.querySelectorAll("#dialog-box button");
+    var dialogBox = document.getElementById("dialog-box"),
+        trigBtn = document.getElementById("trig-btn"),
+        mask = document.querySelector("#mask"),
+        title = document.querySelector("h3"),
+        dialogBtn = document.querySelectorAll("#dialog-box button");
+
 
     var layer = new Layer(dialogBox, mask);
 
@@ -19,6 +21,11 @@
             layer.hide();
         }, false);
     }
+
+    title.addEventListener("drag", function (e) {  //如果希望drag事件生效，元素必须设置draggable="true"
+       layer.drag(title);
+    }, false);
+    
     window.onscroll = function () {
         scroll(dialogBox);
     }

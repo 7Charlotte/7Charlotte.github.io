@@ -23,24 +23,25 @@ Layer.prototype = {
     },
 
     drag: function(node){
-        // console.log("ele:" + node.tagName);
         node.style.cursor = "move";
         node.addEventListener("mousedown",function(e){
             var disX = e.clientX - parseInt(node.parentNode.style.left);
             var disY = e.clientY - parseInt(node.parentNode.style.top);
-            console.log(" left " + disX + " top " + disY);  
-            console.log("event " + e.clientX + " " + e.clientY );
-            var move = function(){
+            console.log(" MouseDown:leftDist " + disX + "MouseDown:topDist " + disY);
+            console.log("mouseX " + e.clientX + " mouseY " + e.clientY );
+            var move = function(e){
                 node.parentNode.style.left = window.clientX - disX + "px";
                 node.parentNode.style.top = window.clientY - disY + "px";
-                console.log(" left " + window.clientX + " top " + window.clientY );            
+                console.log(" left " + e.clientX + " top " +e.clientY );
             }
-            node.addEventListener("mousemove", move, false); 
+            node.addEventListener("mousemove", move, false);
             node.addEventListener("mouseup",function(){
                 node.removeEventListener("mousemove",move,false);
             },false);
+
         },false);
-         
+
+
     }
 }
 

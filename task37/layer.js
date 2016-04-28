@@ -27,11 +27,12 @@ Layer.prototype = {
         node.addEventListener("mousedown", function (e) {
             var disX = e.clientX - parseInt(node.parentNode.style.left);
             var disY = e.clientY - parseInt(node.parentNode.style.top);
-            var move = function (e) {
+            var move = function (e) { //var 定义函数一定要写在调用函数之前，否则调用时会报错undefined
                 node.parentNode.style.left = e.clientX - disX + "px";
                 node.parentNode.style.top = e.clientY - disY + "px";
                 console.log(" mouseX " + e.clientX + " mouseY " + e.clientY);
-            }
+            };
+
             console.log(" MouseDown:leftDist " + disX + "MouseDown:topDist " + disY);
             console.log("mouseX " + e.clientX + " mouseY " + e.clientY);
 

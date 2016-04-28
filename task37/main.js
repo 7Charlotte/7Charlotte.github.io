@@ -5,7 +5,6 @@
         title = document.querySelector("h3"),
         dialogBtn = document.querySelectorAll("#dialog-box button");
 
-
     var layer = new Layer(dialogBox, mask);
 
     trigBtn.addEventListener("click", function () {
@@ -22,10 +21,10 @@
         }, false);
     }
 
-    title.addEventListener("mouseover", function (e) {  //如果希望drag事件生效，元素必须设置draggable="true"
-       layer.drag(title);
+    title.addEventListener("mousedown", function (e) {  //如果希望drag事件生效，元素必须设置draggable="true"
+        layer.drag(title, e);
     }, false);
-    
+
     window.onscroll = function () {
         scroll(dialogBox);
     }

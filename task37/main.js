@@ -22,7 +22,7 @@
         }, false);
     }
 
-    title.addEventListener("drag", function (e) {  //如果希望drag事件生效，元素必须设置draggable="true"
+    title.addEventListener("dragstart", function (e) {  //如果希望drag事件生效，元素必须设置draggable="true"
        layer.drag(title);
     }, false);
     

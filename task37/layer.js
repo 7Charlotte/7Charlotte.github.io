@@ -7,7 +7,7 @@ function Layer(ele, maskEle) {
 
 }
 Layer.prototype = {
-   
+
     hide: function () {
         console.log("hide layer");
         this.maskEle.style.display = "none";
@@ -22,26 +22,27 @@ Layer.prototype = {
 
     },
 
-    drag: function(node){
+    drag: function (node) {
         node.style.cursor = "move";
-        node.addEventListener("mousedown",function(e){
+        node.addEventListener("mousedown", function (e) {
             var disX = e.clientX - parseInt(node.parentNode.style.left);
             var disY = e.clientY - parseInt(node.parentNode.style.top);
-            console.log(" MouseDown:leftDist " + disX + "MouseDown:topDist " + disY);
-            console.log("mouseX " + e.clientX + " mouseY " + e.clientY );
-            var move = function(e){
-                node.parentNode.style.left = window.clientX - disX + "px";
-                node.parentNode.style.top = window.clientY - disY + "px";
-                console.log(" left " + e.clientX + " top " +e.clientY );
+            var move = function (e) {
+                node.parentNode.style.left = e.clientX - disX + "px";
+                node.parentNode.style.top = e.clientY - disY + "px";
+                console.log(" mouseX " + e.clientX + " mouseY " + e.clientY);
             }
-            node.addEventListener("mousemove", move, false);
-            node.addEventListener("mouseup",function(){
-                node.removeEventListener("mousemove",move,false);
-            },false);
+            console.log(" MouseDown:leftDist " + disX + "MouseDown:topDist " + disY);
+            console.log("mouseX " + e.clientX + " mouseY " + e.clientY);
 
-        },false);
+            document.addEventListener("mousemove", move, false);
+            document.addEventListener("mouseup", function () {
+                console.log("mousemove listener removed")
+                document.removeEventListener("mousemove", move, false);
+            }, false);
 
 
+        }, false);
     }
 }
 

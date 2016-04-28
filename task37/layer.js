@@ -40,8 +40,6 @@ Layer.prototype = {
                 console.log("mousemove listener removed")
                 document.removeEventListener("mousemove", move, false);
             }, false);
-
-
         }, false);
     }
 }

@@ -17,3 +17,18 @@ td{
     width: 50px;
     text-align: center;
 }
+input{
+    display: block;
+    width: 200px;
+    margin: 0px auto;
+}
+
+span{
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid deepskyblue;
+    color: deepskyblue ;
+}

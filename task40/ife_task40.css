@@ -1,0 +1,19 @@
+div#cal-picker{
+    width: 300px;
+}
+div#cal-switch{
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0px;
+}
+table#calender{
+    width: 250px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+td{
+    width: 50px;
+    text-align: center;
+}

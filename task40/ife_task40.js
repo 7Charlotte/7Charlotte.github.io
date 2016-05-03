@@ -22,21 +22,21 @@ function init() {
         selYear.innerHTML = i + 1995;
         listYear.appendChild(selYear);
     }
+
     //选中当前年份,不知道为什么childNodes的第一个属性值是text
     listYear.childNodes[nYear + 1 - 1995].setAttribute("selected", "selected");
     listYear.addEventListener("change", calHandler, false);//监听日历事件
-
     //选中当前月份
-    listMon.addEventListener("change", calHandler, false);//监听日历事件
-
     selMon[nMon].setAttribute("selected", "selected");
+    listMon.addEventListener("change", calHandler, false);//监听日历事件
     monClicked = selMon[nMon];
 
+    //渲染日历
     calHandler();
 
+    //输入框内显示当前选中的年月日
     getInputValue(nYear, nMon + 1, nDay);
-
-    //左右切换
+    //左右切换到下一个月
     var arrLeft = document.querySelector("#arr_l");
     var arrRight = document.querySelector("#arr_r");
     arrLeft.addEventListener("click",arrLeftHandler,false);

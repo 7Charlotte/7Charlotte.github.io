@@ -27,10 +27,6 @@ function init() {
     listYear.childNodes[nYear + 1 - 1995].setAttribute("selected", "selected");
     listYear.addEventListener("change", calHandler, false);//监听日历事件
     //选中当前月份
-<<<<<<< HEAD
-=======
-    listMon.addEventListener("change", calHandler, false);//监听日历事件
->>>>>>> origin/master
     selMon[nMon].setAttribute("selected", "selected");
     listMon.addEventListener("change", calHandler, false);//监听日历事件
     monClicked = selMon[nMon];

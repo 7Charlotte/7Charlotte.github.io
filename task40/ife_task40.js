@@ -27,6 +27,10 @@ function init() {
     listYear.childNodes[nYear + 1 - 1995].setAttribute("selected", "selected");
     listYear.addEventListener("change", calHandler, false);//监听日历事件
     //选中当前月份
+<<<<<<< HEAD
+=======
+    listMon.addEventListener("change", calHandler, false);//监听日历事件
+>>>>>>> origin/master
     selMon[nMon].setAttribute("selected", "selected");
     listMon.addEventListener("change", calHandler, false);//监听日历事件
     monClicked = selMon[nMon];
@@ -87,17 +91,17 @@ function calHandler() {
 
 function createCellWithListener() {
     var tableCell = document.createElement("td");
-    tableCell.addEventListener("click", sDay, false);
+    tableCell.addEventListener("click", selDayHandler, false);
     return tableCell;
 }
 
-function sDay(e) {
+function selDayHandler(e) {
     //console.log(e);
     //全局变量dateClicked保存哪个元素被点击了,下次点击时,将上一个元素的值恢复默认;
     if (dateClicked != null) {
         dateClicked.style.color = "black";
     }
-    nDay = e.target.innerHTML;
+    nDay = e.target.innerHTML;//确定哪个被选中了.
     e.target.style.color = "red";
     getInputValue(sYear(), sMon() + 1, myGetDay());
     dateClicked = e.target;
@@ -127,7 +131,6 @@ function sYear() {
 }
 
 function sMon() {
-
     var optIndex = listMon.selectedIndex;
     selMon[optIndex].setAttribute("selected", "selected");
     console.log("optIndex:" + optIndex);

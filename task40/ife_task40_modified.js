@@ -7,14 +7,6 @@ var listYear = document.getElementById("year-list");
 var listMon = document.querySelector("#month-list");
 var optMon = document.querySelectorAll("#month-list option");
 
-
-function getMonDay(mon) {
-    var yearArr = [[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]];
-    //console.log(mon);
-    return yearArr[isLeapYear(calDate.year)][mon];
-
-}
-
 function isLeapYear(iYear) {//是否是闰年
     if (iYear % 4 == 0 && iYear % 100 != 0) {
         return 1;
@@ -51,8 +43,10 @@ function initCal() {
     listYear.childNodes[calDate.year + 1 - 1995].setAttribute("selected", "selected");
     //选中当前月份
     optMon[calDate.month].setAttribute("selected", "selected");
-    calDate.renderInput();
+
+    calDate.initTable();
     calDate.renderTable();
+    calDate.renderInput();
 }
 
 init();
